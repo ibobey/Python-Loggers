@@ -1,6 +1,7 @@
 from typing import NoReturn
 from abc import ABC, abstractmethod
 from dotenv import load_dotenv
+import os
 
 
 class BaseLogger(ABC):
@@ -10,6 +11,13 @@ class BaseLogger(ABC):
         if load_dotenv() is False:
             return False
         return True
+
+    @staticmethod
+    def create_log_folder(folder_name: str) -> bool:
+        if not os.path.exists(f"./{folder_name}"):
+            os.makedirs(folder_name)
+            return True
+        return False
 
     @abstractmethod
     def _set_env_variables(self) -> bool:
@@ -22,6 +30,3 @@ class BaseLogger(ABC):
     @abstractmethod
     def _log(self, message: str) -> NoReturn:
         pass
-
-
-
