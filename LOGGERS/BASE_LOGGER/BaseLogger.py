@@ -6,6 +6,10 @@ import os
 
 class BaseLogger(ABC):
 
+    _IS_ENV_LOADED: bool
+    _FOLDER_NAME: str
+    _LOGGER_NAME: str
+
     @staticmethod
     def load_env() -> bool:
         if load_dotenv() is False:
