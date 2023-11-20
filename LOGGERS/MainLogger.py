@@ -6,8 +6,6 @@ import logging
 
 class MainLogger(BaseLogger):
 
-    logger: logging.Logger
-
     def __init__(self):
         self._IS_ENV_LOADED = super().load_env()
         self._set_env_variables()
