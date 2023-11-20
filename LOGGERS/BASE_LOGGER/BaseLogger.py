@@ -1,3 +1,4 @@
+from logging import Logger
 from typing import NoReturn
 from abc import ABC, abstractmethod
 from dotenv import load_dotenv
@@ -9,6 +10,8 @@ class BaseLogger(ABC):
     _IS_ENV_LOADED: bool
     _FOLDER_NAME: str
     _LOGGER_NAME: str
+    _FILE_NAME: str
+    logger: Logger
 
     @staticmethod
     def load_env() -> bool:
@@ -32,5 +35,5 @@ class BaseLogger(ABC):
         pass
 
     @abstractmethod
-    def _log(self, message: str) -> NoReturn:
+    def log(self, message: str) -> NoReturn:
         pass
