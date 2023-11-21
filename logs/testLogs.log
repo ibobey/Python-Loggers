@@ -1,0 +1,4 @@
+ ERROR | 2023-11-21 12:07:19,797 | ErrorLogger | this is a test error log 234 
+ CRITICAL | 2023-11-21 12:07:19,798 | CriticalLogger | this is a test log message 
+ INFO | 2023-11-21 12:07:19,799 | InfoLogger | this is a test info log 
+ WARNING | 2023-11-21 12:07:19,799 | WarningLogger | this is a warning test log 
