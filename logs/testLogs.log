@@ -2,3 +2,8 @@
  CRITICAL | 2023-11-21 12:07:19,798 | CriticalLogger | this is a test log message 
  INFO | 2023-11-21 12:07:19,799 | InfoLogger | this is a test info log 
  WARNING | 2023-11-21 12:07:19,799 | WarningLogger | this is a warning test log 
+ WARNING | 2023-11-21 16:44:53,963 | WarningLogger | this is a warning test log 
+ WARNING | 2023-11-21 16:48:38,872 | WarningLogger | this is a warning test log 
+ INFO | 2023-11-21 16:48:38,873 | InfoLogger | Test info 
+ CRITICAL | 2023-11-21 16:48:38,873 | CriticalLogger | test critical log 
+ ERROR | 2023-11-21 16:48:38,874 | ErrorLogger | test errror message 

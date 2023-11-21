@@ -8,16 +8,16 @@ class CriticalLogger(BaseLogger):
 
     def __init__(self):
         super().__init__()
-        self._set_env_variables()
+        self._set_env_vars()
         self._setup()
 
-    def _set_env_variables(self) -> bool:
+    def _set_env_vars(self) -> bool:
         if self.IS_ENV_EXISTS is not True:
             raise Exception("Cannot find env variables")
         self._LOGGER_NAME = getenv("CRITICAL_LOGGER_NAME", "CriticalLogger")
         return True
 
-    def _setup(self) -> bool:
+    def _setup(self) -> None:
         self.logger = logging.getLogger(self._LOGGER_NAME)
         self.logger.setLevel(logging.CRITICAL)
         formatter = logging.Formatter(self._LOG_FORMAT)
@@ -26,7 +26,6 @@ class CriticalLogger(BaseLogger):
         file_handler.setLevel(logging.CRITICAL)
         file_handler.setFormatter(formatter)
         self.logger.addHandler(file_handler)
-        return True
 
-    def log(self, message: str) -> NoReturn:
+    def log(self, message: str) -> None:
         self.logger.critical(message)

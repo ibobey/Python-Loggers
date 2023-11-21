@@ -1,12 +1,11 @@
+from LOGGERS.BASE_LOGGER.ILOGGER.ILogger import ILogger
 from logging import Logger
-from typing import NoReturn
-from abc import ABC, abstractmethod
 from dotenv import load_dotenv
 from os import getenv
 import os
 
 
-class BaseLogger(ABC):
+class BaseLogger(ILogger):
     _FOLDER_NAME: str
     _FILE_NAME: str
 
@@ -18,36 +17,34 @@ class BaseLogger(ABC):
     logger: Logger
 
     def __init__(self):
-        self.IS_ENV_EXISTS = BaseLogger.__load_env()
-        self.__set_const_env()
-        BaseLogger.__create_log_folder(folder_name=self._FILE_NAME)
+        self.IS_ENV_EXISTS = BaseLogger._load_env()
+        self._set_const_env_vars()
+        BaseLogger._create_log_folder(folder_name=self._FILE_NAME)
 
     @staticmethod
-    def __load_env() -> bool:
+    def _load_env() -> bool:
         if load_dotenv() is False:
             return False
         return True
 
     @staticmethod
-    def __create_log_folder(folder_name: str) -> bool:
+    def _create_log_folder(folder_name: str) -> bool:
         if not os.path.exists(f"./{folder_name}"):
             os.makedirs(folder_name)
             return True
         return False
 
-    def __set_const_env(self):
+    def _set_const_env_vars(self) -> bool:
         self._FILE_NAME: str = getenv("LOGS_FILE_NAME", "testLogs")
         self._FOLDER_NAME: str = getenv("LOGS_FOLDER_NAME", "logs")
         self._LOG_FORMAT: str = getenv("LOG_FORMAT", "| %(levelname)s | %(asctime)s | %(name)s | %(message)s")
+        return True
 
-    @abstractmethod
-    def _set_env_variables(self) -> bool:
+    def _set_env_vars(self) -> bool:
         pass
 
-    @abstractmethod
-    def _setup(self) -> bool:
+    def _setup(self) -> None:
         pass
 
-    @abstractmethod
-    def log(self, message: str) -> NoReturn:
+    def log(self, message: str) -> None:
         pass
