@@ -19,7 +19,7 @@ class BaseLogger(ILogger):
     def __init__(self):
         self.IS_ENV_EXISTS = BaseLogger._load_env()
         self._set_const_env_vars()
-        BaseLogger._create_log_folder(folder_name=self._FILE_NAME)
+        BaseLogger._create_log_folder(folder_name=self._FOLDER_NAME)
 
     @staticmethod
     def _load_env() -> bool:
