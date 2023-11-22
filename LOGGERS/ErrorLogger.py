@@ -1,11 +1,12 @@
-from os import getenv
 from LOGGERS.BASE_LOGGER.BaseLogger import BaseLogger
 import logging
+from os import getenv
 
 
 class ErrorLogger(BaseLogger):
 
-    def __init__(self):
+    def __init__(self, logger_name: str):
+        self._LOGGER_NAME = logger_name
         super().__init__()
         self._set_env_vars()
         self._setup()
@@ -13,7 +14,7 @@ class ErrorLogger(BaseLogger):
     def _set_env_vars(self) -> bool:
         if self.IS_ENV_EXISTS is not True:
             raise Exception("Cannot find env variables")
-        self._LOGGER_NAME = getenv("ERROR_LOGGER_NAME", "ErrorLogger")
+        self._FILE_NAME: str = getenv("ERROR_LOGS_FILE_NAME", "errorLogs")
         return True
 
     def _setup(self) -> None:
@@ -26,5 +27,5 @@ class ErrorLogger(BaseLogger):
         file_handler.setFormatter(formatter)
         self.logger.addHandler(file_handler)
 
-    def log(self, message: str) -> None:
+    def log_error(self, message: str) -> None:
         self.logger.error(message)

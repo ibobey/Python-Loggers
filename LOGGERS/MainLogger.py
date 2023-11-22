@@ -3,9 +3,10 @@ from LOGGERS.BASE_LOGGER.BaseLogger import BaseLogger
 import logging
 
 
-class InfoLogger(BaseLogger):
+class MainLogger(BaseLogger):
 
-    def __init__(self):
+    def __init__(self, logger_name: str):
+        self._LOGGER_NAME = logger_name
         super().__init__()
         self._set_env_vars()
         self._setup()
@@ -13,10 +14,11 @@ class InfoLogger(BaseLogger):
     def _set_env_vars(self) -> bool:
         if self.IS_ENV_EXISTS is not True:
             raise Exception("Cannot find env variables")
-        self._LOGGER_NAME = getenv("INFO_LOGGER_NAME", "ErrorLogger")
+        self._FILE_NAME: str = getenv("LOGS_FILE_NAME", "serverLogs")
         return True
 
     def _setup(self) -> None:
+
         self.logger = logging.getLogger(self._LOGGER_NAME)
         self.logger.setLevel(logging.INFO)
         formatter = logging.Formatter(self._LOG_FORMAT)
@@ -26,5 +28,14 @@ class InfoLogger(BaseLogger):
         file_handler.setFormatter(formatter)
         self.logger.addHandler(file_handler)
 
-    def log(self, message: str) -> None:
+    def log_info(self, message: str) -> None:
         self.logger.info(message)
+
+    def log_warning(self, message: str) -> None:
+        self.logger.warning(message)
+
+    def log_critical(self, message: str) -> None:
+        self.logger.critical(message)
+
+    def log_error(self, message: str) -> None:
+        self.logger.error(message)

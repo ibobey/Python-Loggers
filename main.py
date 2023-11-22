@@ -1,17 +1,13 @@
+from LOGGERS.MainLogger import MainLogger
 from LOGGERS.ErrorLogger import ErrorLogger
-from LOGGERS.CriticalLogger import CriticalLogger
-from LOGGERS.InfoLogger import InfoLogger
-from LOGGERS.WarningLogger import WarningLogger
+
+logger = MainLogger("testLogger")
+logger.log_info("sel123am")
+logger.log_warning("war123213ning")
+logger.log_critical("selam am123123ca")
+logger.log_error("errorree123")
 
 
-warningLogger = WarningLogger()
-warningLogger.log(message="this is a warning test log")
+err = ErrorLogger("errorLoggger")
+err.log_error(message="test error")
 
-infoLogger = InfoLogger()
-infoLogger.log(message="Test info")
-
-criticalLogger = CriticalLogger()
-criticalLogger.log(message="test critical log")
-
-errorLogger = ErrorLogger()
-errorLogger.log(message="test errror message")

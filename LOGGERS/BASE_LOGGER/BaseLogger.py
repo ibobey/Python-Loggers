@@ -35,16 +35,12 @@ class BaseLogger(ILogger):
         return False
 
     def _set_const_env_vars(self) -> bool:
-        self._FILE_NAME: str = getenv("LOGS_FILE_NAME", "testLogs")
         self._FOLDER_NAME: str = getenv("LOGS_FOLDER_NAME", "logs")
         self._LOG_FORMAT: str = getenv("LOG_FORMAT", "| %(levelname)s | %(asctime)s | %(name)s | %(message)s")
         return True
 
-    def _set_env_vars(self) -> bool:
-        pass
+    def _set_env_vars(self) -> bool: ...
 
-    def _setup(self) -> None:
-        pass
+    def _setup(self) -> None: ...
 
-    def log(self, message: str) -> None:
-        pass
+    def log_error(self, message: str) -> None: ...
